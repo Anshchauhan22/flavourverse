@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FlavourVerse - Find Your Next Favorite Meal</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-800">
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold">FlavourVerse</a>
+            <nav class="hidden md:flex items-center space-x-8 text-lg">
+                <a href="#home" class="hover:text-amber-300 transition-colors">Home</a>
+                <a href="#cuisines" class="hover:text-amber-300 transition-colors">Cuisines</a>
+                <a href="#diets" class="hover:text-amber-300 transition-colors">Diets</a>
+                <a href="#meal-planner-section" id="planner-nav-link" class="hover:text-amber-300 transition-colors">Meal Planner</a>
+                <a href="#recipe-of-the-day" class="hover:text-amber-300 transition-colors">Surprise Me</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden">
+                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+         <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md text-gray-800">
+             <a href="#home" class="block py-2 px-6 text-sm hover:bg-amber-100">Home</a>
+             <a href="#cuisines" class="block py-2 px-6 text-sm hover:bg-amber-100">Cuisines</a>
+             <a href="#diets" class="block py-2 px-6 text-sm hover:bg-amber-100">Diets</a>
+             <a href="#meal-planner-section" class="block py-2 px-6 text-sm hover:bg-amber-100">Meal Planner</a>
+             <a href="#recipe-of-the-day" class="block py-2 px-6 text-sm hover:bg-amber-100">Surprise Me</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-white">
+            <div class="text-center px-4">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4">Discover Delicious Recipes</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Search our curated recipes — images, ingredients and steps included. No setup needed.</p>
+                <form id="search-form" class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Search for 'pasta', 'chicken', 'smoothie'..." class="w-full p-4 pr-12 text-gray-800 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        <button type="submit" class="absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 hover:text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="seasonal-specials" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 id="seasonal-title" class="text-3xl md:text-4xl font-bold text-center mb-12"></h2>
+                <div id="seasonal-recipes" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+            </div>
+        </section>
+
+        <section id="search-results-section" class="py-20 md:py-28 hidden">
+             <div class="container mx-auto px-6">
+                <h2 id="results-title" class="text-3xl md:text-4xl font-bold text-center mb-12"></h2>
+                <div id="loader" class="mx-auto loader hidden"></div>
+                <div id="search-results" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+                <p id="error-message" class="text-center text-red-500 mt-8 hidden"></p>
+            </div>
+        </section>
+
+        <section id="cuisines" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Explore World Cuisines</h2>
+                <div id="cuisines-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center"></div>
+            </div>
+        </section>
+
+        <section id="diets" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Dietary Spotlight</h2>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="diet-card bg-white p-6 rounded-lg shadow-md text-center cursor-pointer" data-diet="Vegetarian">
+                        <img src="https://placehold.co/100x100/A7F3D0/34D399?text=Veg" class="mx-auto rounded-full mb-4" alt="Vegetarian">
+                        <h3 class="text-xl font-bold">Vegetarian</h3>
+                    </div>
+                    <div class="diet-card bg-white p-6 rounded-lg shadow-md text-center cursor-pointer" data-diet="Vegan">
+                        <img src="https://placehold.co/100x100/BAE6FD/3B82F6?text=Vegan" class="mx-auto rounded-full mb-4" alt="Vegan">
+                        <h3 class="text-xl font-bold">Vegan</h3>
+                    </div>
+                    <div class="diet-card bg-white p-6 rounded-lg shadow-md text-center cursor-pointer" data-diet="Gluten Free">
+                        <img src="https://placehold.co/100x100/FDE68A/F59E0B?text=GF" class="mx-auto rounded-full mb-4" alt="Gluten-Free">
+                        <h3 class="text-xl font-bold">Gluten-Free</h3>
+                    </div>
+                    <div class="diet-card bg-white p-6 rounded-lg shadow-md text-center cursor-pointer" data-diet="Ketogenic">
+                        <img src="https://placehold.co/100x100/FBCFE8/EC4899?text=Keto" class="mx-auto rounded-full mb-4" alt="Ketogenic">
+                        <h3 class="text-xl font-bold">Keto</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-gallery" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Watch & Cook</h2>
+                <div id="video-recipes-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            </div>
+        </section>
+        
+        <section id="recipe-of-the-day" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Recipe of the Day</h2>
+                <div id="random-recipe-container" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:flex items-center cursor-pointer hover:shadow-2xl transition-shadow duration-300"></div>
+            </div>
+        </section>
+
+        <section id="chefs-corner" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">From The Chef's Corner</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="tip-card bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556910108-82504278abe8?q=80&w=2940&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Knife skills">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Master Your Knife Skills</h3>
+                            <p class="text-gray-600 mb-4">Learn the essential cuts that will make you faster and more efficient in the kitchen.</p>
+                            <a href="#" class="font-bold text-amber-600 hover:text-amber-800">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="tip-card bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1599547528993-8db222a4e477?q=80&w=2940&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Spices">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">The Art of Seasoning</h3>
+                            <p class="text-gray-600 mb-4">Understand how to use salt, spices, and herbs to elevate any dish from good to great.</p>
+                            <a href="#" class="font-bold text-amber-600 hover:text-amber-800">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="tip-card bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?q=80&w=2864&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Baking">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Baking 101: Common Mistakes</h3>
+                            <p class="text-gray-600 mb-4">Avoid these common pitfalls to ensure your cakes, cookies, and breads turn out perfect every time.</p>
+                            <a href="#" class="font-bold text-amber-600 hover:text-amber-800">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="meal-planner-section" class="py-20 md:py-28 bg-white hidden">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Your Weekly Meal Plan</h2>
+                <div class="bg-amber-50 p-6 rounded-lg shadow-inner max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4">My Saved Recipes</h3>
+                    <p id="meal-plan-empty-msg" class="text-gray-500">You haven't added any recipes yet. Find a recipe and click "Add to Meal Plan" in the details view!</p>
+                    <ul id="meal-plan-list" class="space-y-3"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="bg-amber-500 py-16 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-2">Get Weekly Recipes!</h2>
+                <p class="mb-6 max-w-xl mx-auto">Join our newsletter to get new recipes, cooking tips, and special offers delivered right to your inbox.</p>
+                <form class="max-w-md mx-auto" id="newsletter-form">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input id="newsletter-email" type="email" placeholder="Enter your email" class="w-full p-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" required>
+                        <button type="submit" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition-colors">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold mb-2">FlavourVerse</h3>
+            <p class="mb-6">Your daily dose of culinary inspiration.</p>
+            <p class="text-gray-400">&copy; 2025 FlavourVerse. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="recipe-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto modal-content relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modal-content-container"></div>
+        </div>
+    </div>
+
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[60] hidden p-4">
+        <div class="bg-black w-full max-w-4xl aspect-video relative modal-content">
+            <button id="close-video-modal" class="absolute -top-10 right-0 text-white hover:text-amber-300">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="video-iframe-container" class="w-full h-full"></div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
